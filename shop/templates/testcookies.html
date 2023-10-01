@@ -1,0 +1,52 @@
+<html>
+   <head>
+      <script type = "text/javascript">
+
+            function ReadCookie() {
+               var allcookies = document.cookie;
+               document.write ("All Cookies : " + allcookies );
+
+               // Get all the cookies pairs in an array
+               cookiearray = allcookies.split(';');
+
+               // Now take key value pair out of this array
+               for(var i=0; i<cookiearray.length; i++) {
+                  name1 = cookiearray[i].split('=').shift();
+                  name2 = cookiearray[i].split('=')[0];
+                  value = cookiearray[i].split('=')[1];
+                  document.write ("Key is : " +"hhhhhhh"+ name1+ "hhhhhhh"+name2 +"hhhh"+ " and Value is : " + value);
+                  list = ["123","345"]
+            document.write(list);
+            list.shift();
+            document.write(list);
+            list.shift();
+            document.write(list);
+               }
+            }
+            function cookie_to_json(){
+    var cookie_text = document.cookie;
+    var arr = [];
+    var text_to_split = cookie_text.split(";");
+    for(var i in text_to_split){
+        var tmp = text_to_split[i].split("=");
+        {#arr.push('"'+tmp.shift().trim()+'":"'+tmp.join(":").trim()+'"');#}
+        console.log(tmp.join(":").trim());
+        console.log(tmp.shift().trim());
+        console.log(tmp.join(":").trim());
+    };
+    var res ='{\n'+arr.join(",\n")+'\n}';
+    return JSON.parse(res);
+}
+console.log(cookie_to_json());
+
+
+      </script>
+   </head>
+
+   <body>
+      <form name = "myform" action = "">
+         <p> click the Button to View Result:</p>
+         <input type = "button" value = "Get Cookie" onclick = "cookie_to_json()"/>
+      </form>
+   </body>
+</html>

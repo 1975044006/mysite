@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览记录</title>
+    <link rel="stylesheet" href="{% static "css/1.css" %}">
+</head>
+
+<body>
+
+<div id="contain">
+    {% for i in goods %}
+        <div class="main">
+            <a href="/gooddetail?goodsname={{ i.goodsName.goodsName }}">
+                <img src="{{ i.goodsName.mainImg.url }}" alt="" class="img">
+                {{ i.goodsName.goodsName }}
+                价格：{{ i.goodsName.price }}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<div id="contain">
+    {% for i in rangee %}
+        <a href="/buyhistory?page={{ i }}"><div>{{ i }}</div></a>
+    {% endfor %}
+</div>
+</body>
+</html>

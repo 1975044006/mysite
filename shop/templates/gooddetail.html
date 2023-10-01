@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+</head>
+<body>
+    <div style="text-align: center">
+        <img src="{{ good.mainImg.url }}" alt="" width="100px">
+        <h2>商品名：{{ goodsname }}</h2>
+        <span>卖家账号：{{ good.userName.userName }}</span><br>
+        <span>类别：{{ good.kind }}</span><br>
+        <span>单价：{{ good.price }}</span><br>
+        <span>库存:{{ good.inventory }}</span><br>
+        <span>介绍：{{ good.intro }}</span><br>
+        {% for i in imglist  %}
+        <img src="{{ i }}" alt="" width="600px"><br>
+        {% endfor %}
+         {% if username is not None %}
+             <form action="/shopcart/" method="post">
+                 {% csrf_token %}
+                 <input type="text" name="goodsname" value="{{ goodsname }}" style="display: none ">
+                 <input type="text" name="username" value="{{ username }}" style="display: none ">
+                 购买个数:<input type="text" name="num" placeholder="输入购买个数">
+                 <input type="submit" value="加入购物车">
+             </form>
+
+        {% endif %}
+    </div>
+</body>
+</html>

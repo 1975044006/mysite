@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理卖家</title>
+    <script>
+        function memberUpd(e){
+            let sellername = e.parentNode.parentNode.children[0].innerHTML;
+            window.open("/memberupd?username="+sellername);
+        }
+
+        async function delmember(e){
+            let sellername = e.parentNode.parentNode.children[0].innerHTML;
+            const url = "/delmember?username="+sellername;
+            const response =  await fetch(url, {
+                method : "GET"
+            });
+            const jsonn = await response.json();
+            if (jsonn.msg === "ok")
+                e.parentNode.parentNode.remove()
+                console.log("删除成功");
+        }
+
+    </script>
+</head>
+<body style="text-align: center">
+    <h1>管理员{{ adminname }}您好</h1>
+    <table style="margin:0 auto">
+        <tr>
+            <th>卖家账号</th>
+            <th>密码</th>
+            <th>email</th>
+            <th>修改</th>
+        </tr>
+        {% for i in sellersob %}
+        <tr>
+            <td>{{ i.userName }}</td>
+            <td>{{ i.password }}</td>
+            <td>{{ i.email1 }}</td>
+            <td><button onclick=memberUpd(this)>修改密码或email</button></td>
+            <td><button onclick=delmember(this)>删除</button></td>
+        </tr>
+    {% endfor %}
+    </table>
+    <button onclick=window.open("/addmember")>添加卖家账号</button>
+
+</body>
+</html>

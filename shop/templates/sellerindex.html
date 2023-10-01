@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>卖家{{ username }}的管理页面</title>
+    <script>
+         function modgood(e){
+            let goodsname = e.parentNode.parentNode.children[0].innerHTML;
+            window.open(("/modgood?goodsname=" + goodsname), "_self");
+        }
+
+        async function delgood(e){
+            let goodsname = e.parentNode.parentNode.children[0].innerHTML;
+            const url = "/delgood?goodsname="+goodsname
+            const response =  await fetch(url, {
+                method : "GET"
+            });
+            const jsonn = await response.json();
+            console.log(jsonn);
+            if (jsonn.msg === "ok")
+                e.parentNode.parentNode.remove()
+                console.log("删除成功");
+        }
+
+        function buylog(e){
+            let goodsname = e.parentNode.parentNode.children[0].innerHTML;
+            window.open(("/buylog?goodsname=" + goodsname));
+        }
+
+        function browsinglog(e){
+            let goodsname = e.parentNode.parentNode.children[0].innerHTML;
+            window.open(("/browsinglog?goodsname=" + goodsname));
+        }
+
+        function addgood(){
+             window.open("/addgood/");
+        }
+
+        function logout(){
+             window.open("/logout/")
+            {#document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";#}
+            {#document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";#}
+            {#location.reload();#}
+        }
+
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>商品名</td>
+            <td>单价/元</td>
+            <td>库存</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% for i in goods %}
+        <tr>
+            <td>{{ i.goodsName }}</td>
+            <td>{{ i.price }}</td>
+            <td>{{ i.inventory }}</td>
+            <td><button onclick="modgood(this)">修改</button></td>
+            <td><button onclick="delgood(this)">删除</button></td>
+            <td><button onclick="buylog(this)">购买日志</button></td>
+            <td><button onclick="browsinglog(this)">浏览日志</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button onclick="addgood()">添加商品</button>
+    <button onclick="logout()">退出登录</button>
+
+
+
+
+</body>
+</html>

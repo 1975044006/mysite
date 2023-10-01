@@ -1,0 +1,75 @@
+{% load static %}
+{% load shop_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>销售人员销售业绩监控</title>
+    <script>
+        function searchuser(){
+            const url = "/sellerPERF?userName="　+ document.getElementById("userName").value;
+            window.open(url);
+        }
+    </script>
+    <link rel="stylesheet" href="{% static "css/百分比条.css" %}">
+</head>
+<body>
+<div style="text-align: center">
+    搜索销售人员: <input type="text" placeholder="输入用户账号" id="userName" value="{{ userName }}">
+    <button onclick="searchuser()">搜索</button>
+</div>
+
+<table>
+
+    {% for i in listt %}
+        <tr>
+            <th>卖家账号</th>
+            <th>卖家总销售额</th>
+            <th>库存量/商品销售量</th>
+        </tr>
+        <tr>
+            <td>{{ i|filterk2v:"userName" }}</td>
+            <td>{{ i|filterk2v:"salestotal" }}</td>
+            <td>
+                <div class="container" style="margin: 0 auto 0">
+                    <div class="skills" style="width: {{i|filterk2v:"INVtotalPCT"}};">{{i|filterk2v:"INVtotalPCT"}}</div>
+                </div>
+                <div class="container2" style="margin: 0 auto 0">
+                    <div class="zileft">{{ i|filterk2v:"INVtotal" }}</div>
+                    <div class="ziright">{{ i|filterk2v:"salesnumtotal" }}</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>缩略图</th>
+            <th>商品名</th>
+            <th>现价/元</th>
+            <th>销售额/元</th>
+            <th>库存量/商品销售量</th>
+        </tr>
+        {% for j in i|filterk2v:"goods" %}
+        <tr>
+            <td><img src="{{ j|filterk2v:"mainImg" }}" alt="" height="30px"></td>
+            <td>{{ j|filterk2v:"goodsName" }}</td>
+            <td>{{ j|filterk2v:"price" }}</td>
+            <td>{{ j|filterk2v:"totalprice" }}</td>
+            <td>
+                <div class="container" style="margin: 0 auto 0">
+                    <div class="skills" style="width: {{j|filterk2v:"inventoryPCT"}};">{{j|filterk2v:"inventoryPCT"}}</div>
+                </div>
+                <div class="container2" style="margin: 0 auto 0">
+                    <div class="zileft">{{ j|filterk2v:"inventory" }}</div>
+                    <div class="ziright">{{ j|filterk2v:"sellnum" }}</div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

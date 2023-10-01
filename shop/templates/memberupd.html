@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改账户{{ username }}的信息</title>
+</head>
+<body style="text-align: center">
+<form action="/memberupd/" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" value="{{ username }}" style="display: none">
+    <input type="password" name="password" value="{{ userOb.password }}"><br>
+    <input type="email" name="email" value="{{ userOb.email1 }}"><br>
+    <input type="submit"  value="提交修改">
+</form>
+</body>
+</html>

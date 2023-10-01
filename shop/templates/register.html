@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script>
+        async function sendCode(){
+            let email = document.getElementsByName("email")[0].value;
+            let username = document.getElementsByName("username")[0].value;
+            let auList = document.getElementsByName("authority");
+            let authority;
+            for (let i = 0; i<auList.length; i++){
+                if(auList[i].checked){
+                    authority = auList[i].value;
+                    break;
+                }
+            }
+            const url = '/sendcode?email='+email+'&username='+username+"&authority="+authority;
+            const response =  await fetch(url, {
+                method : "GET"
+            });
+            const jsonn = await response.json();
+            document.getElementById("sendState").innerHTML=jsonn.msg;
+
+        }
+    </script>
+</head>
+<body>
+<form action="/register/" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="账号名" class="center1"><br>
+    <input type="password" name="password" placeholder="密码"><br>
+    选择账号类型<input type="radio" name="authority" value="user">用户<input type="radio" name="authority" value="seller">卖家 <br>
+    <input type="email" name="email" placeholder="email" ><br>
+
+    <input type="text" name="code" placeholder="邮箱验证码" >
+    <button type="button" onclick="sendCode()">发送注册验证码到邮箱</button>
+    <span id="sendState" style="color: red"></span><br>
+
+    <input type="submit" value="注册">
+    <div style="color: red">{{ error }}</div>
+</form>
+</body>
+</html>

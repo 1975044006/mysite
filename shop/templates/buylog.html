@@ -1,0 +1,31 @@
+{% load shop_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品购买记录</title>
+</head>
+<body>
+    <h3 style="text-align: center">商品：{{ goodsname }}</h3>
+    <table style="text-align: center">
+        <tr>
+            <th>订单号</th>
+            <th>买家账号</th>
+            <th>单价/元</th>
+            <th>购买个数</th>
+            <th>总价/元</th>
+            <th>购买时间</th>
+        </tr>
+        {% for i in logs %}
+            <tr>
+                <td>{{ i.orderNumber }}</td>
+                <td>{{ i.userName.userName }}</td>
+                <td>{{ i.price }}</td>
+                <td>{{ i.num }}</td>
+                <td>{{ i.price|totalprice:i.num }}</td>
+                <td>{{ i.time|datetime2str }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

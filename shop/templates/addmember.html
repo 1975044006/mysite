@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加成员</title>
+</head>
+<body style="text-align: center;">
+<form action="/addmember/" method="post">
+    {% csrf_token %}
+    账号:<input type="text" name="username" placeholder="请输入账号"><br>
+    密码:<input type="password" name="password" placeholder="请输入密码"><br>
+    email:<input type="email" name="email" placeholder="请输入邮箱"><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

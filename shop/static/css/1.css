@@ -1,0 +1,49 @@
+#contain{
+    display: flex;
+    /*挤不下换行*/
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+
+#headfather{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height:100px;
+}
+.levelright{
+    justify-content:right;
+}
+.levelbetween{
+    justify-content:space-between;
+}
+
+
+.main{
+    width: 250px;
+    height:180px;
+}
+
+.head{
+    width: 500px;
+    height:100px;
+}
+
+.img{
+    width:250px;
+    height:150px;
+}
+
+/*.center1{*/
+/*    text-align: center;*/
+/*}*/
+
+/*html {*/
+/*font-size: 30px;*/
+/*}*/
+
+
+
+/*.bigzi{*/
+/*    font-size: 2rem;*/
+/*}*/

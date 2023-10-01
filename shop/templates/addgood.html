@@ -1,0 +1,21 @@
+{% load shop_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品</title>
+</head>
+<body>
+<form action="/addgood/" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    商品名：<input type="text" name="goodsname" placeholder="输入商品名"><br>
+    类别：<input type="text" name="kind" placeholder="输入商品类别"><br>
+    商品单价/元：<input type="text" name="price" placeholder="输入商品单价"><br>
+    库存：<input type="text" name="inventory" placeholder="输入库存"><br>
+    商品介绍：<input type="text" name="intro" placeholder="输入商品介绍"><br>
+    商品缩略图：<input type="file" name="mainImg" accept="image/*"><br>
+    商品详情图：<input type="file" name="imgs" multiple="multiple" accept="image/*" value="一到三张"><br>
+    <input type="submit" value="上传">
+</form>
+</body>
+</html>

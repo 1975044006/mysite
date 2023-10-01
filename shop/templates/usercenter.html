@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心</title>
+</head>
+<body>
+    <div>
+        <h2>您好,{{ username }}</h2>
+        <span>余额:{{ balance }}</span><span style="color: red">{{ msg }}</span>
+        <form action="/usercenter/" method="post">
+            {% csrf_token %}
+            充值金额:<input type="text" name="addbalance" placeholder="输入金额">
+            <input type="submit" value="充值">
+        </form>
+    </div>
+
+
+</body>
+</html>

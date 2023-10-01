@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mysite主页</title>
+    <link rel="stylesheet" href=" {% static 'css/1.css' %} ">
+    <script>
+        function search() {
+            let goodsName = document.getElementById("searchText").value
+            window.location.href = "/?goodsName=" + goodsName
+        }
+    </script>
+</head>
+<body>
+<div id="headfather" class="levelbetween">
+    <h2>mysite</h2>
+    <div>
+        <input type="text" placeholder="请输入商品名称检索" id="searchText" value="{% if goodsName %}{{ goodsName }}{% endif %}">
+        <button onclick=search()>点击搜索</button>
+    </div>
+    <div>
+        {% if authority == None  %}
+            <a href="{% url 'login' %}">登录</a>
+            <a href="/register/">注册</a>
+        {% else %}
+            <a href="/browsehistory">浏览记录&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="/userbuylog">购买记录&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="/shopcart">购物车&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="/usercenter/">用户 {{ username }} 个人中心&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="/logout/">退出登录</a>
+        {% endif %}
+    </div>
+
+</div>
+
+<div id="contain">
+    {% if topgoods is not None and page == 0%}
+    {% for i in topgoods %}
+        <div class="main">
+            <a href="/gooddetail?goodsname={{ i.goodsName }}">
+                <img src="{{ i.mainImg.url }}" alt="" class="img">
+                {{ i.goodsName }}
+                价格：{{ i.price }}
+            </a>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    {% for i in goods %}
+        <div class="main">
+            <a href="/gooddetail?goodsname={{ i.goodsName }}">
+                <img src="{{ i.mainImg.url }}" alt="" class="img">
+                {{ i.goodsName }}
+                价格：{{ i.price }}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<div id="contain">
+    {% for i in rangee %}
+        {% if goodsName is not None %}
+            <a href="/?page={{ i }}&goodsName={{ goodsName }}"><div>{{ i }}</div></a>
+        {% else %}
+        <a href="/?page={{ i }}"><div>{{ i }}</div></a>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+</body>
+</html>

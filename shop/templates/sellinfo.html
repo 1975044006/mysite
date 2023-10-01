@@ -1,0 +1,52 @@
+{% load shop_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>销售情况统计</title>
+    <link rel="stylesheet" href="{% static "css/百分比条.css" %}">
+    <script>
+        function searchgood(){
+            const url = "/sellinfo?goodsName="　+ document.getElementById("goodsName").value;
+            window.open(url);
+        }
+
+    </script>
+</head>
+<body>
+
+<div style="text-align: center">
+    搜索商品名: <input type="text" placeholder="输入商品名" id="goodsName" value="{{ goodsName }}">
+    <button onclick="searchgood()">搜索</button>
+</div>
+
+<table>
+    <tr>
+        <th>缩略图</th>
+        <th>商品名</th>
+    <th>现价/元</th>
+        <th>销售额/元</th>
+        <th>库存量/商品销售量</th>
+    </tr>
+    {% for i in listt %}
+        <tr>
+            <td><img src="{{ i|filterk2v:"mainImg" }}" alt="" height="30px"></td>
+            <td>{{ i|filterk2v:"goodsName" }}</td>
+            <td>{{ i|filterk2v:"price" }}</td>
+            <td>{{ i|filterk2v:"totalprice" }}</td>
+            <td>
+                <div class="container" style="margin: 0 auto 0">
+                    <div class="skills" style="width: {{i|filterk2v:"inventoryPCT"}};">{{i|filterk2v:"inventoryPCT"}}</div>
+                </div>
+                <div class="container2" style="margin: 0 auto 0">
+                    <div class="zileft">{{ i|filterk2v:"inventory" }}</div>
+                    <div class="ziright">{{ i|filterk2v:"sellnum" }}</div>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
